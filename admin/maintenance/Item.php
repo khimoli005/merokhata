@@ -7,7 +7,7 @@
 	<div class="card-header">
 		<h3 class="card-title">List of Item</h3>
 		<div class="card-tools">
-			<a href="?page=maintenance/manage_category" class="btn btn-flat btn-primary"><span class="fas fa-plus"></span>  Create New</a>
+			<a href="?page=maintenance/manage_item" class="btn btn-flat btn-primary"><span class="fas fa-plus"></span>  Create New</a>
 		</div>
 	</div>
 	<div class="card-body">
@@ -42,7 +42,7 @@
 						<tr>
 							<td class="text-center"><?php echo $i++; ?></td>
 							<td><?php echo date("Y-m-d H:i",strtotime($row['date_created'])) ?></td>
-							<td><?php echo $row['category'] ?></td>
+							<td><?php echo $row['item'] ?></td>
 							<td ><p class="truncate-1 m-0"><?php echo $row['description'] ?></p></td>
 							<td class="text-center">
                                 <?php if($row['status'] == 1): ?>
@@ -57,7 +57,7 @@
 				                    <span class="sr-only">Toggle Dropdown</span>
 				                  </button>
 				                  <div class="dropdown-menu" role="menu">
-				                    <a class="dropdown-item" href="?page=maintenance/manage_category&id=<?php echo $row['id'] ?>"><span class="fa fa-edit text-primary"></span> Edit</a>
+				                    <a class="dropdown-item" href="?page=maintenance/manage_item&id=<?php echo $row['id'] ?>"><span class="fa fa-edit text-primary"></span> Edit</a>
 				                    <div class="dropdown-divider"></div>
 				                    <a class="dropdown-item delete_data" href="javascript:void(0)" data-id="<?php echo $row['id'] ?>"><span class="fa fa-trash text-danger"></span> Delete</a>
 				                  </div>
@@ -73,14 +73,14 @@
 <script>
 	$(document).ready(function(){
 		$('.delete_data').click(function(){
-			_conf("Are you sure to delete this category permanently? The action will remove also the budget and expense under this category","delete_category",[$(this).attr('data-id')])
+			_conf("Are you sure to delete this item permanently? The action will remove also the budget and expense under this item","delete_item",[$(this).attr('data-id')])
 		})
 		$('.table').dataTable();
 	})
-	function delete_category($id){
+	function delete_item($id){
 		start_loader();
 		$.ajax({
-			url:_base_url_+"classes/Master.php?f=delete_category",
+			url:_base_url_+"classes/Master.php?f=delete_item",
 			method:"POST",
 			data:{id: $id},
 			dataType:"json",
